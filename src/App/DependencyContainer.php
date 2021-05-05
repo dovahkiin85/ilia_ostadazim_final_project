@@ -43,6 +43,10 @@ final class DependencyContainer
 
     public static function getUserRepository(): UserRepository
     {
-        throw new RuntimeException('Not implemented yet!');
+        if (!isset(self::$dependencies['locationRepo'])) {
+            self::$dependencies['locationRepo'] = new \Fira\Infrastructure\Database\Sql\Mysql\LocationRepository();
+        }
+
+        return self::$dependencies['locationRepo'];
     }
 }
